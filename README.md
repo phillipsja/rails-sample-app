@@ -42,3 +42,7 @@ If the test suite passes, you'll be ready to run the app in a local server:
 $ rails server
 ```
 
+Then just to make heroku is setup..
+
+>heroku create
+>git push heroku master
