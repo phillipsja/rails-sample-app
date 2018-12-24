@@ -1,24 +1,44 @@
-# README
+# rails-sample-app
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[*Ruby on Rails Tutorial* book](http://www.railstutorial.org/book).
 
-Things you may want to cover:
+#Setting up Repo
 
-* Ruby version
+#create rails app
+>rails _5.1.6_ new sample_app
+edit "Gemfile" if needed
+>bundle install --without production
+>bundle update
 
-* System dependencies
+Setup Git
 
-* Configuration
+[Use this](https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/)
+as a reference. 
 
-* Database creation
+But don't forget these steps: 
 
-* Database initialization
+>git init
+>git add . 
+>git commit -m "msg"
+setup git repo and copy link
+>git remote add origin remote repository URL
+>git push origin master
 
-* How to run the test suite
+Next, migrate the database:
 
-* Services (job queues, cache servers, search engines, etc.)
+```
+$ rails db:migrate
+```
 
-* Deployment instructions
+Finally, run the test suite to verify that everything is working correctly:
 
-* ...
+```
+$ rails test
+```
+
+If the test suite passes, you'll be ready to run the app in a local server:
+
+```
+$ rails server
+```
+
