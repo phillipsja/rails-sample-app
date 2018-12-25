@@ -81,6 +81,78 @@ or you can specify rollback to version:
 rails db:migrate VERSION=0
 ```
 
+#3.3.1 Testing
+
+Generating controllers generates test files, e.g.
+test/controllers/static_pages_controller_test.rb
+for the StaticPages controller
+
+Check out the default test for the home/help actions: 
+
+``
+require 'test_helper'
+
+class StaticPagesControllerTest < ActionDispatch::IntegrationTest
+
+  test "should get home" do
+    get static_pages_home_url
+    assert_response :success
+  end
+
+  test "should get help" do
+    get static_pages_help_url
+    assert_response :success
+  end
+end
+```
+
+To run the test...
+```
+rails test
+```
+
+#3.3.2 "Red, Green, Refactor" cycle
+
+We are going to create a new controller, for an "About" page. 
+But first, write a test
+Just like the others, add test to test/controllers/static_pages_controller_test.rb
+
+
+```
+  test "should get about" do
+    get static_pages_about_url
+    assert_response :success
+  end
+```
+
+Of course the test fails, so first add new route to 
+config/routes.rb
+
+```
+get  'static_pages/about'
+```
+
+followed by a corresponding action in app/controllers/static_pages_controller.rb
+```
+  def about
+  end
+```
+
+...and finally, create the view app/views/static_pages/about.html.erb
+
+
+Note: in 
+```
+  test "should get about" do
+	get static_pages_about_url
+	assert_response :success
+  end
+```
+
+the indentation, and the do-end wrappter around test
+
+
+
 
 
 
