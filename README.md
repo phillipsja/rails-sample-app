@@ -258,3 +258,64 @@ Guard Gem was already installed, so just need to initialize:
 `bundle exec guard init`
 
 
+#4 Rails-Flavored-Ruby
+
+Talking about the layout that we looked at earlier, this line in particular: 
+
+`<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>`
+
+`[stylesheet_link_tag](https://api.rubyonrails.org/classes/ActionView/Helpers/AssetTagHelper.html#method-i-stylesheet_link_tag)` is a build in ruby function
+e.g.
+
+```
+stylesheet_link_tag "style"
+# => <link href="/assets/style.css" media="screen" rel="stylesheet" />
+```
+
+Ruby ideas to be covered: 
+Ruby ideas: 
+- built-in Rails methods (or custom helpers) 
+- method invocation with missing parentheses 
+- symbols 
+- hashes
+
+
+e.g. custom helper in the context of the page title we earlier, i.e. 
+in the template: 
+```<%= yield(:title) %> | Ruby on Rails Tutorial Sample App```
+in the view: 
+```<% provide(:title, "Home") %>```
+
+What if the view was missing the provide statement? 
+
+Custom Helper: 
+
+Define a custom helper called full_title. The full_title helper returns a base title, 
+“Ruby on Rails Tutorial Sample App”, if no page title is defined, and adds a vertical 
+bar preceded by the page title if one is defined: 
+
+```
+module ApplicationHelper
+
+  # Returns the full title on a per-page basis.
+  def full_title(page_title = '')
+    base_title = "Ruby on Rails Tutorial Sample App"
+    if page_title.empty?
+      base_title
+    else
+      page_title + " | " + base_title
+    end
+  end
+end
+```
+
+So in the page replace: 
+`<title><%= yield(:title) %> | Ruby on Rails Tutorial Sample App</title>`
+with 
+`<title><%= full_title(yield(:title)) %></title>`
+
+Now update tests and remove the provide in Home page view
+
+
+									   
+
