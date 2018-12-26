@@ -228,5 +228,12 @@ value for title in it for this to work, e.g.:
 
 ```<% provide(:title, "Home") %>```
 	
+#3.4.4 Setting the root route
 
+Hasn't this already been covered? 
 
+Question, what's the difference between `/` and `#` in:
+```
+  get 'static_pages/help'
+  root 'static_pages#home'
+```
