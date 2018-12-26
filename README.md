@@ -237,3 +237,24 @@ Question, what's the difference between `/` and `#` in:
   get 'static_pages/help'
   root 'static_pages#home'
 ```
+
+#3.6 Advance Test Setup
+
+install gem for showing color in win32 console: 
+`gem install win32console`
+
+Also add to test_helper.rb to make use of minitest reporters gem: 
+
+```
+require "minitest/reporters"
+Minitest::Reporters.use!
+```
+
+...some problem with above, didn't work to show color
+
+#3.6.2 Automated Test Monitoring using "Guard"
+
+Guard Gem was already installed, so just need to initialize:
+`bundle exec guard init`
+
+
