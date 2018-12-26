@@ -151,8 +151,82 @@ Note: in
 
 the indentation, and the do-end wrappter around test
 
+#3.4 "Slightly Dynamic Pages" 
+
+The `rails new` command creates a layout page by default: 
+app/views/layouts/application.html.erb
+
+We gonna use this to display the title in the child view pages. 
+Not sure why we are doing this to the default layout file
+ `mv app/views/layouts/application.html.erb layout_file`
+
+But in the TDD approach, write some tests. New command: 
+
+`assert_select` 
+
+this is a selector (like jquery) that we can incorporate into tests: 
+
+e.g. 
+
+`assert_select "title", "Home | Ruby on Rails Tutorial Sample App"`
+
+So this is literally (well, "Home", "Help" and "About" changes), 
+what we add to each test in: 
+
+`test/controllers/static_pages_controller_test.rb`
+
+You could add the title tag w/string to each template, but skip that...
+
+...
+
+Note, `setup` method is run first in every test
+So, instance variable: 
+def setup
+    `@base_title = "Ruby on Rails Tutorial Sample App"`
+then use it in tests: 
+
+```
+  test "should get home" do
+    get static_pages_home_url
+    assert_response :success
+    assert_select "title", "Home | #{@base_title}"
+  end
+```
+
+#3.4.3 Embedded Ruby wink(.erb) and Layouts
+
+use `provide` function to set a different title
+
+```
+<% provide(:title, "Home") %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= yield(:title) %> | Ruby on Rails Tutorial Sample App</title>
+  </head>
+```  
+
+Note the templating delimitef `<% ... %>`
+and `<%= ... %>`
+
+So again, you could change all the pages to use this, but this section is supposed
+to be on layouts so...
 
 
+So put the layout file back to its default (I guess this interferred with running the 
+tests as some kind of illustration: 
 
+`mv layout_file app/views/layouts/application.html.erb`
+
+So replace: 
+`    <title>SampleApp</title>`
+with 
+`	<title><%= yield(:title) %> | Ruby on Rails Tutorial Sample App</title>`
+	
+Oh, yeah, each view, will need to have the provide funtion with the appropriate 
+value for title in it for this to work, e.g.: 
+
+```<% provide(:title, "Home") %>```
+	
 
 
