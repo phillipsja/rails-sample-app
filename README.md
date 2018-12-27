@@ -423,6 +423,61 @@ module ApplicationHelper
 end
 ```	
 
+#4.3.1 Arrays and Ranges
+
+
+`.split`
+splits on white space by default into array
+`.split`('x') or you can split on arbitrarily defined delimiter
+
+Some other array methods
+.empty?
+.include? # should be .includes? if you ask me
+.sort
+.reverse
+.shuffle
+
+! will mutate array
+e.g. 
+a = [1,2,3]
+a.shuffle!
+a
+=> [1,3,2]
+
+`<<` ~ "shovel operator" is equivalent to push
+a.push(4) ~ a<<4
+
+
+"ranges" are like arrays
+```
+>> a = %w[foo bar baz quux]         # Use %w to make a string array.
+=> ["foo", "bar", "baz", "quux"]
+>> a[0..2]
+=> ["foo", "bar", "baz"]
+```
+
+-1 allows selecting end element in a range
+```
+>> a = (0..9).to_a
+=> [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+>> a[2..(a.length-1)]               # Explicitly use the array's length.
+=> [2, 3, 4, 5, 6, 7, 8, 9]
+>> a[2..-1]                         # Use the index -1 trick.
+=> [2, 3, 4, 5, 6, 7, 8, 9]
+>> a[-1]
+=> 9
+```
+
+Ranges work with characters
+```
+>> ('a'..'e').to_a
+=> ["a", "b", "c", "d", "e"]
+```
+
+
+
+
+
 
 									   
 
