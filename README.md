@@ -388,6 +388,41 @@ The string 'foobar' is nonempty.
 => nil
 ```
 
+#4.2.4 Note on Methods
+
+Note that Ruby functions have an implicit return, meaning they return the last statement evaluated
+
+So notice in the method there is no return keyword: 
+
+
+```
+>> def string_message(the_function_argument = '')
+>>   if the_function_argument.empty?
+>>     "It's an empty string!"
+>>   else
+>>     "The string is nonempty."
+>>   end
+>> end
+```
+
+
+Or in the case of our sample app's full_title "custom helper"
+
+```
+module ApplicationHelper
+
+  # Returns the full title on a per-page basis.       # Documentation comment
+  def full_title(page_title = '')                     # Method def, optional arg
+    base_title = "Ruby on Rails Tutorial Sample App"  # Variable assignment
+    if page_title.empty?                              # Boolean test
+      base_title                                      # Implicit return
+    else
+      page_title + " | " + base_title                 # String concatenation
+    end
+  end
+end
+```	
+
 
 									   
 
