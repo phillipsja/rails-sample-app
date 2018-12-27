@@ -316,6 +316,13 @@ with
 
 Now update tests and remove the provide in Home page view
 
+#4.2 strings and methods
+
+`rails console`
+
+starts dev console (as opposed to test or prod)
+
+[Ruby Docs](http://ruby-doc.org/)
 
 									   
 
