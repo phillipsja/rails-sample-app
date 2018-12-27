@@ -345,6 +345,49 @@ Ruby won't interpolate single-quoted strings, but otherwise they are equivalent?
 => "\#{foo} bar"
 ```
 
+#4.2.3 Objects and Message Passing
+
+Ruby uses `?` as a convention on methods that return a bool, e.g. 
+```
+s = "foo"
+s.empty? 
+=> false
+```
+
+Use elsif for "else if" 
+
+i.e. 
+```
+if empty? 
+"something"
+elsif s.include("foo")? 
+"whatever"
+end
+
+to string method
+```
+.to_s
+```
+check for nil method
+```
+.nil? 
+```
+s
+
+odd use of if, follows statement
+```
+x = "something"
+puts "x is not empty" if !x.empty?
+```
+
+unless does the same thing
+```
+>> string = "foobar"
+>> puts "The string '#{string}' is nonempty." unless string.empty?
+The string 'foobar' is nonempty.
+=> nil
+```
+
 
 									   
 
