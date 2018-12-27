@@ -324,5 +324,27 @@ starts dev console (as opposed to test or prod)
 
 [Ruby Docs](http://ruby-doc.org/)
 
+`#` for single-line comment
+
+#4.2.2 Strings
+
+String interpolation "#{var}"
+```
+>> first_name = "Michael"    # Variable assignment
+=> "Michael"
+>> "#{first_name} Hartl"     # String interpolation
+=> "Michael Hartl"
+```
+
+Print string (in console) using `puts`
+
+Ruby won't interpolate single-quoted strings, but otherwise they are equivalent? 
+
+```
+>> '#{foo} bar'     # Single-quoted strings don't allow interpolation
+=> "\#{foo} bar"
+```
+
+
 									   
 
