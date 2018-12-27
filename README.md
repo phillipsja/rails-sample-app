@@ -474,7 +474,27 @@ Ranges work with characters
 => ["a", "b", "c", "d", "e"]
 ```
 
+#4.3.2 Blocks
 
+```
+(1..5).each { |i| puts 2 * i }
+```
+
+The vertical bars identify the block variable
+
+Use the do-end convention for multi-line blocks: 
+
+```
+>> (1..5).each do |i|
+?>   puts 2 * i
+>> end
+2
+4
+6
+8
+10
+=> 1..5
+```
 
 
 
