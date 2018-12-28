@@ -388,7 +388,6 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.5-x86-mingw32)
-    wdm (0.1.1)
     web-console (3.5.1)
       actionview (>= 5.0)
       activemodel (>= 5.0)
@@ -432,7 +431,6 @@ DEPENDENCIES
   turbolinks (= 5.0.1)
   tzinfo-data
   uglifier (= 3.2.0)
-  wdm (>= 0.1.0)
   web-console (= 3.5.1)
   will_paginate (= 3.1.6)
 

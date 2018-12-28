@@ -833,6 +833,11 @@ Summary:
 -Rails allows us to define custom routing rules, thereby providing named routes.
 -Integration tests effectively simulate a browser clicking from page to page.
 
+#5.1.2 Add bootstrap sass and some custom css
+
+Note that the added file "custom.scss" is a sass file (added by me) and will be included in the 
+"asset pipeline" by default (by nature of the location ~/app/assets/stylesheets) 
+
 
 
 
