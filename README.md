@@ -520,7 +520,7 @@ i.e.
 NoMethodError: undefined method `split' for :name:Symbol
 ```
 
-Not sure what the point of hashes are, but apparently they are heavily used
+Not sure what the point of hashes are, but apparently they are heavily used,
 As are hashes-of-hashes: 
 
 ```
@@ -532,6 +532,19 @@ As are hashes-of-hashes:
 => {:user=>{:name=>"Michael Hartl", :email=>"mhartl@example.com"}}
 >>  params[:user][:email]
 => "mhartl@example.com"
+```
+
+Because it’s so common for hashes to use symbols as keys, as of version 1.9 Ruby 
+supports a new syntax just for this special case (i.e. key:"value"); I guess the 
+the takeaway is don't be fooled into thinking this construct is the one like 
+in javascript? 
+
+Unfortunately, this can be confusing, especially since :name is valid on its own (as a standalone symbol) but 
+	name: has no meaning by itself. 
+The bottom line is that :name => and name: are effectively the same only inside literal hashes
+
+```
+h2 = { name: "Michael Hartl", email: "michael@example.com" }
 ```
 
 `inspect`  returns a string with a literal representation of the object it’s called on:
@@ -587,10 +600,30 @@ params[:child] = person3
 params[:father][:first]
 ``` 
 
+#4.3.4 CSS link
+
+Recall this in the layout: 
+
+```
+<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+```
 
 
+Q: So if stylesheet_link_tag is a function, where the parantheses? 
+A: In Ruby, they are optional, so the following are equal: 
 
+```
+# Parentheses on function calls are optional.
+stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+stylesheet_link_tag('application', media: 'all', 'data-turbolinks-track': 'reload')
+```
 
+Q: Note the media argument looks like a hash, but where are the curly braces? 
+A: When hashes are the last argument in a function call, the curly braces are optional, 
+so these two are equivalent:
 
-									   
-
+```
+# Curly braces on final hash arguments are optional.
+stylesheet_link_tag 'application', { media: 'all', 'data-turbolinks-track': 'reload' }
+stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+```
