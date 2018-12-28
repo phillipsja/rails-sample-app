@@ -51,6 +51,16 @@ Then just to make heroku is setup..
 
 #3.2.1 Generating Controllers & Actions with Scaffolding
 
+Summarized Chpt. 3
+
+-For a third time, we went through the full procedure of creating a new Rails application from scratch, installing the necessary gems, pushing it up to a remote repository, and deploying it to production.
+-The rails script generates a new controller with rails generate controller ControllerName <optional action names>.
+-New routes are defined in the file config/routes.rb.
+-Rails views can contain static HTML or embedded Ruby (ERb).
+-Automated testing allows us to write test suites that drive the development of new features, allow for confident refactoring, and catch regressions.
+-Test-driven development uses a “Red, Green, Refactor” cycle.
+-Rails layouts allow the use of a common template for pages in our application, thereby eliminating duplication.
+
 using `generate controller`, create StaticPages controller with home & help "actions"
 ```
 rails generate controller StaticPages home help
