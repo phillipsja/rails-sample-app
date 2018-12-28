@@ -496,6 +496,99 @@ Use the do-end convention for multi-line blocks:
 => 1..5
 ```
 
+#4.3.3 Hashes & Symbols
+
+Recall my first introduction to hashes was in Perl (i.e. associative array) 
+and later "hash set" in "C#"
+
+Hashes are indicated with curly braces instead of brackets
+
+```
+my_hash1 = {}
+my_hash2 = { "party" => "b-hole", "bigtime" => "oh-yeah"}
+```
+
+Symbols: 
+
+You can think of symbols as basically strings without all the extra baggage
+
+i.e.
+```
+>> "name".split('')
+=> ["n", "a", "m", "e"]
+>> :name.split('')
+NoMethodError: undefined method `split' for :name:Symbol
+```
+
+Not sure what the point of hashes are, but apparently they are heavily used
+As are hashes-of-hashes: 
+
+```
+>> params = {}        # Define a hash called 'params' (short for 'parameters').
+=> {}
+>> params[:user] = { name: "Michael Hartl", email: "mhartl@example.com" }
+=> {:name=>"Michael Hartl", :email=>"mhartl@example.com"}
+>> params
+=> {:user=>{:name=>"Michael Hartl", :email=>"mhartl@example.com"}}
+>>  params[:user][:email]
+=> "mhartl@example.com"
+```
+
+`inspect`  returns a string with a literal representation of the object it’s called on:
+```
+>> puts (1..5).to_a            # Put an array as a string.
+1
+2
+3
+4
+5
+>> puts (1..5).to_a.inspect    # Put a literal array.
+[1, 2, 3, 4, 5]
+>> puts :name, :name.inspect
+name
+:name
+>> puts "It worked!", "It worked!".inspect
+It worked!
+"It worked!"
+```
+
+using inspect to print an object is common enough that there’s a shortcut for it, the p function
+```
+>> p :name             # Same output as 'puts :name.inspect'
+:name
+```
+
+Exercises: 
+
+1) Define a hash with the keys 'one', 'two', and 'three', and the values 'uno', 'dos', and 'tres'. 
+Iterate over the hash, and for each key/value pair print out "'#{key}' in Spanish is '#{value}'".
+```
+espanol1 = { one: "uno", two: "dos", three: "tres" }
+espanol1.each do |key, value|
+  puts "'#{key}' in Spanish is '#{value}'"
+end
+```
+
+2) Create three hashes called person1, person2, and person3, with first and last names 
+under the keys :first and :last. Then create a params hash so that params[:father] is person1, 
+params[:mother] is person2, and params[:child] is person3. Verify that, for example, 
+params[:father][:first] has the right value.
+
+```
+person1 = { first: "Bob", last:"Jones"}
+person2 = { first: "Mary", last:"Jones"}
+person3 = { first: "Joey", last:"Jones"}
+
+params = {}
+params[:father] = person1
+params[:mother] = person2
+params[:child] = person3
+
+params[:father][:first]
+``` 
+
+
+
 
 
 
