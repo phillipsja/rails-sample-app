@@ -747,6 +747,57 @@ How in the heck does this work:
 => "borafo"
 ```
 
+#4.4.5 A User Class (that will be used in the Sample App)
+
+```
+class User
+  attr_accessor :name, :email
+
+  def initialize(attributes = {})
+    @name  = attributes[:name]
+    @email = attributes[:email]
+  end
+
+  def formatted_email
+    "#{@name} <#{@email}>"
+  end
+end
+```
+
+`attr_accessor :name, :email` creates "getter" and "setter" methods for in
+stance vars name/email. 
+Instance variables always begin with an @ sign, and are nil when undefined.
+
+initialize method is kind of like a constructor afaict
+
+Note that the instance variables are available in the formatted_email method
+
+Usage (using rails console): 
+```
+require './example_user'     # This is how you load the example_user code.
+=> true
+example = User.new
+=> #<User:0x224ceec @email=nil, @name=nil>
+example.name                 # nil since attributes[:name] is nil
+=> nil
+example.name = "Example User"           # Assign a non-nil name
+=> "Example User"
+example.email = "user@example.com"      # and a non-nil email address
+=> "user@example.com"
+example.formatted_email
+=> "Example User <user@example.com>"
+```
+
+Also recall that, 
+we can omit the curly braces for final hash arguments
+
+So we can omit the curly braces when initializing a new user: 
+```
+user = User.new(name: "Michael Hartl", email: "mhartl@example.com")
+=> #<User:0x225167c @email="mhartl@example.com", @name="Michael Hartl">
+```
+
+
 
 
 
