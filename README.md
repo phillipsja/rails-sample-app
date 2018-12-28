@@ -627,3 +627,127 @@ so these two are equivalent:
 stylesheet_link_tag 'application', { media: 'all', 'data-turbolinks-track': 'reload' }
 stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
 ```
+
+#4.4 Ruby Classes
+
+Literal Constructor equivalent to named constructor: 
+
+```
+>> s = "foobar"       # A literal constructor for strings using double quotes
+=> "foobar"
+>> s.class
+=> String
+>> s = String.new("foobar")   # A named constructor for a string
+=> "foobar"
+>> s.class
+=> String
+>> s == "foobar"
+=> true
+```
+
+Same with arrays: 
+```
+>> a = Array.new([1, 3, 2])
+=> [1, 3, 2]
+```
+
+
+But hashes are different: 
+
+Hash.new takes a default value for the hash, which is the value of the hash for a nonexistent key: 
+```
+>> h = Hash.new
+=> {}
+>> h[:foo]            # Try to access the value for the nonexistent key :foo.
+=> nil
+>> h = Hash.new(0)    # Arrange for nonexistent keys to return 0 instead of nil.
+=> {}
+>> h[:foo]
+=> 0
+```
+
+#4.4.2 Class Inheritance
+
+.superclass method: 
+```
+>> s = String.new("foobar")
+=> "foobar"
+>> s.class                        # Find the class of s.
+=> String
+>> s.class.superclass             # Find the superclass of String.
+=> Object
+>> s.class.superclass.superclass  # Ruby has a BasicObject base class as of 1.9
+=> BasicObject
+>> s.class.superclass.superclass.superclass
+=> nil
+```
+
+Some class syntax examples
+
+Create a class: 
+
+```
+class Word
+  def palindrome?(string)
+    string == string.reverse
+  end
+end
+=> :palindrome?
+```
+
+Instantiate class: 
+```
+w = Word.new              # Make a new Word object.
+=> #<Word:0x22d0b20>
+w.palindrome?("foobar")
+=> false
+w.palindrome?("level")
+=> true
+```
+
+Add a method onto the String class (Word inherits String) just like that, 
+note that `this` in Ruby is `self`? : 
+```
+class Word < String             # Word inherits from String.
+  # Returns true if the string is its own reverse.
+  def palindrome?
+    self == self.reverse        # self is the string itself.
+  end
+end
+=> nil
+```
+
+#4.4.3 Modifying built-in classes
+
+Ruby classes can be opened and modified, allowing ordinary 
+mortals such as ourselves to add methods to them:
+
+
+```
+class String
+  # Returns true if the string is its own reverse.
+  def palindrome?
+    self == self.reverse
+  end
+end
+=> nil
+"deified".palindrome?
+=> true
+```
+
+How in the heck does this work: 
+
+```
+>> class String
+>>   def shuffle
+>>     self.?('').?.?
+>>   end
+>> end
+>> "foobar".shuffle
+=> "borafo"
+```
+
+
+
+
+
