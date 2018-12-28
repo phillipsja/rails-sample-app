@@ -1,0 +1,2 @@
+link_to
+render e.g. <%= render 'layouts/shim' %>
