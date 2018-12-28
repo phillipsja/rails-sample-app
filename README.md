@@ -838,6 +838,11 @@ Summary:
 Note that the added file "custom.scss" is a sass file (added by me) and will be included in the 
 "asset pipeline" by default (by nature of the location ~/app/assets/stylesheets) 
 
+#5.1.3 Partials
+
+convention is to name partials with leading underscore (e.g. _mypartial.erb)
+include and render them in a view like this: 
+`<%= render 'layouts/shim' %>`
 
 
 
