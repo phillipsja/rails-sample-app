@@ -260,6 +260,19 @@ Guard Gem was already installed, so just need to initialize:
 
 #4 Rails-Flavored-Ruby
 
+-Here's the summary from the end of the chapter: 
+-Ruby has a large number of methods for manipulating strings of characters.
+-Everything in Ruby is an object.
+-Ruby supports method definition via the def keyword.
+-Ruby supports class definition via the class keyword.
+-Rails views can contain static HTML or embedded Ruby (ERb).
+-Built-in Ruby data structures include arrays, ranges, and hashes.
+-Ruby blocks are a flexible construct that (among other things) allow natural iteration over enumerable data structures.
+-Symbols are labels, like strings without any additional structure.
+-Ruby supports object inheritance.
+-It is possible to open up and modify built-in Ruby classes.
+-The word “deified” is a palindrome.
+
 Talking about the layout that we looked at earlier, this line in particular: 
 
 `<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>`
