@@ -1299,7 +1299,52 @@ Here's how to run the integration tests:
 ```
 rails test:integration
 ```
+
+
+Exercise: 
+
+It’s convenient to use the full_title helper in the tests by including the Application helper 
+into the test helper, as shown in Listing 5.35. We can then test for the right title using 
+code like Listing 5.36. This is brittle, though, because now any typo in the base title 
+(such as “Ruby on Rails Tutoial”) won’t be caught by the test suite. Fix this problem by 
+writing a direct test of the full_title helper, which involves creating a file to test 
+the application helper and then filling in the code indicated with FILL_IN in Listing 5.37. 
+(Listing 5.37 uses assert_equal <expected>, <actual>, which verifies that the expected result
+ matches the actual value when compared with the == operator.)
+ 
+ 
+ I don't get this line: 
+ 
+ "This is brittle, though, because now any typo in the base title 
+(such as “Ruby on Rails Tutoial”) won’t be caught by the test suite." 
+
+Why not? 
+ 
+
+use the title_helper we wrote earlier in the integration test. 
+
+First we need to include the "Application Helper" in the tests. 
+So add `include ApplicationHelper` in test/test_helper.rb
+
+Next, in the site_layout_test file we add: 
+```
+    get contact_path
+    assert_select "title", full_title("Contact")
+```
   
+Now, create a new file in test/helpers/application_helper_test.rb
+and replace FILL_IN
+```
+require 'test_helper'
+
+class ApplicationHelperTest < ActionView::TestCase
+  test "full title helper" do
+    assert_equal full_title,         FILL_IN
+    assert_equal full_title("Help"), FILL_IN
+  end
+end
+```
+
 
 
 
