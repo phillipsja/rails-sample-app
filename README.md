@@ -844,6 +844,376 @@ convention is to name partials with leading underscore (e.g. _mypartial.erb)
 include and render them in a view like this: 
 `<%= render 'layouts/shim' %>`
 
+#5.2 Sass and the asset pipeline
+
+The Asset Pipeline: 
+- asset directories 
+- manifest files
+- preprocessor engines
+
+Asset Directories
+- app/assets - specific to app? 
+- lib/assets - written by team
+- vendor/assets - 3pl
+
+each of these in turn contain: 
+- images
+- javascripts
+- stylesheets
+
+Use manifest files to describe how to combine .css into single file. 
+I don't really understand the example: 
+"The manifest file for app-specific CSS, located @
+app/assets/stylesheets/application.css
+```
+/*
+ .
+ .
+ .
+ *= require_tree .
+ *= require_self
+*/
+```
+
+Basically, the directives at the bottom are read-in even though it is commented out? 
+`require_tree . `
+"ensures that all CSS files in the app/assets/stylesheets 
+directory (including the tree subdirectories) are included into the application CSS"
+
+`require_self`
+specifies where in the loading sequence the CSS in application.css itself gets included
+
+Here's a link to the docs: 
+
+Here's some more info specific to the above: 
+"
+The require_tree directive in a CSS manifest works the same way as the JavaScript one, 
+requiring all stylesheets from the current directory.
+
+In this example, require_self is used. This puts the CSS contained within the 
+file (if any) at the precise location of the require_self call."
+
+you can specify individual files and they are compiled in the order specified. For example, you might concatenate three CSS files together this way:
+
+/* ...
+*= require reset
+*= require layout
+*= require chrome
+*/
+
+So I guess yeah, the comments stay? 
+
+Preprocess engines: 
+
+1) ERB
+2) Coffee Script
+3) Sass
+
+You can chain preprocessor directives: 
+
+`foobar.js.erb.coffee`
+
+gets run through both CoffeeScript and ERb (with the code running from right to left, i.e., CoffeeScript first).
+
+#5.2.2 Sass
+
+"Syntactically Awesome Stylesheets" 
+
+Improvement on CSS, top three improvements: 
+
+1) Nesting
+2) Variables
+3) Mixins
+
+Nesting
+
+Here's a clear example: 
+
+In css: 
+```
+.center {
+  text-align: center;
+}
+
+.center h1 {
+  margin-bottom: 10px;
+}
+```
+
+Refactored in Sass: 
+```
+.center {
+  text-align: center;
+  h1 {
+    margin-bottom: 10px;
+  }
+}
+```
+
+
+Here's another example: 
+```
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+}
+
+#logo:hover {
+  color: #fff;
+  text-decoration: none;
+}
+```
+In order to nest the second rule, 
+we need to reference the parent 
+element #logo; in SCSS, this is accomplished 
+with the ampersand character & as follows:
+
+```
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+  &:hover {
+    color: #fff;
+    text-decoration: none;
+  }
+}
+```
+
+Variables
+
+You can create your own using `$`, e.g. 
+
+$light-gray: #777
+
+You can also use the fact that bootstrap defines [less variables](https://getbootstrap.com/docs/3.3/customize/#less-variables) for all
+kinds of stuff and those variables can be used since bootstrap-sass gem provides the Sass equivalents. 
+
+e.g. our "$light-gray" variable is defined in bootstrap sass as
+`@gray-light`
+So we could just use
+`$gray-light`
+
+Using these techniques, we can refactor the custom.scss file: 
+```
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/* universal */
+
+body {
+  padding-top: 60px;
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.center {
+  text-align: center;
+}
+
+.center h1 {
+  margin-bottom: 10px;
+}
+
+/* typography */
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+}
+
+h1 {
+  font-size: 3em;
+  letter-spacing: -2px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.2em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
+  color: #777;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
+
+/* header */
+
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+}
+
+#logo:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* footer */
+
+footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid #eaeaea;
+  color: #777;
+}
+
+footer a {
+  color: #555;
+}
+
+footer a:hover {
+  color: #222;
+}
+
+footer small {
+  float: left;
+}
+
+footer ul {
+  float: right;
+  list-style: none;
+}
+
+footer ul li {
+  float: left;
+  margin-left: 15px;
+}
+```
+to
+```
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/* mixins, variables, etc. */
+
+$gray-medium-light: #eaeaea;
+
+/* universal */
+
+body {
+  padding-top: 60px;
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.center {
+  text-align: center;
+  h1 {
+    margin-bottom: 10px;
+  }
+}
+
+/* typography */
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+}
+
+h1 {
+  font-size: 3em;
+  letter-spacing: -2px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.2em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
+  color: $gray-light;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
+
+
+/* header */
+
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+  &:hover {
+    color: white;
+    text-decoration: none;
+  }
+}
+
+/* footer */
+
+footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid $gray-medium-light;
+  color: $gray-light;
+  a {
+    color: $gray;
+    &:hover {
+      color: $gray-darker;
+    }
+  }
+  small {
+    float: left;
+  }
+  ul {
+    float: right;
+    list-style: none;
+    li {
+      float: left;
+      margin-left: 15px;
+    }
+  }
+}
+```
+
+
+
+
+
 
 
 
