@@ -1253,8 +1253,53 @@ Here's the conversion...
 ```  
 
 This new pattern routes a GET request for the URL /help to the help action in the Static Pages controller. 
-As with the rule for the root route, this creates two named routes
+As with the rule for the root route, this creates two named routes. 
 
+Now, update partials to use named routes. 
+
+#5.3.4 Layout Link Tests
+
+So we just changed a bunch of links. We could test it all manually, or we could
+write a test to do it for us. 
+
+we will scaffold a test template called site_layout: 
+
+```
+rails generate integration_test site_layout
+```
+
+Cool, this generates a folder under "test" called "integration" and a filed
+calld "site_layout_tests.rb" with a skeleton ready for writing tests! 
+
+Are test is checking the named routes: 
+```
+  test "layout links" do
+    get root_path
+    assert_template 'static_pages/home'
+    assert_select "a[href=?]", root_path, count: 2
+    assert_select "a[href=?]", help_path
+    assert_select "a[href=?]", about_path
+    assert_select "a[href=?]", contact_path
+  end
+  ```
+  
+Here's some other parameters to the assert_select, this looks like a selector syntax: 
+```
+assert_select "div"	<div>foobar</div>
+assert_select "div", "foobar"	<div>foobar</div>
+assert_select "div.nav"	<div class="nav">foobar</div>
+assert_select "div#profile"	<div id="profile">foobar</div>
+assert_select "div[name=yo]"	<div name="yo">hey</div>
+assert_select "a[href=?]", '/', count: 1	<a href="/">foo</a>
+assert_select "a[href=?]", '/', text: "foo"	<a href="/">foo</a>
+
+```
+
+Here's how to run the integration tests: 
+```
+rails test:integration
+```
+  
 
 
 
