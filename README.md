@@ -1211,6 +1211,50 @@ footer {
 ```
 
 
+#5.3 Named routes
+
+For a link like
+```
+<a href="/static_pages/about">About</a>
+```
+
+in Rails we use a named route, which is defined somewhere obviously: 
+```
+<%= link_to "About", about_path %>
+```
+
+So to illustrate this, the contact page is being referenced (which was added
+as an exercise in an earlier chapter), here are the things to add when 
+adding a view? 
+
+1) Create Test in test/controllers/static_pages_controller_test.rb
+2) Add a route in config/routes.rb
+3) Add action in app/controllers/static_pages_controller.rb
+4) Add view @ app/views/static_pages/contact.html.erb
+
+#5.3.2 Routes
+
+Defined in Routes file (config/routes.rb)	
+
+First a review of the three ways shown so far to define a root route (which I don't remember): 
+root 'application#hello' (in hello world application)
+root 'users#index'       (also in hello world application)
+root 'static_pages#home' (in toy app)
+
+Here's the conversion...
+
+```
+  #get 'static_pages/help'
+  get 'help', to: 'static_pages#help'
+  #get 'static_pages/about'
+  get 'about', to: 'static_pages#about'
+  #get 'static_pages/contact'
+  get 'contact', to: 'static_pages#contact'
+```  
+
+This new pattern routes a GET request for the URL /help to the help action in the Static Pages controller. 
+As with the rule for the root route, this creates two named routes
+
 
 
 
