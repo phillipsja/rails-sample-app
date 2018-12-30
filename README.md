@@ -1353,8 +1353,10 @@ Use rails generate to build scaffold:
 
 ```rails generate controller Users new```
 
-So recall that arguments arger the controller name, Users, are actions that we can setup
-right-away, 0 or many. 
+So recall that arguments are the controller name, Users, and actions that we can setup
+right-away, 0 or many, in this case just one action, `new`
+
+
 
 
 
