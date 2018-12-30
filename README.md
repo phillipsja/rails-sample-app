@@ -1345,6 +1345,17 @@ class ApplicationHelperTest < ActionView::TestCase
 end
 ```
 
+#5.4 User Signup
+
+Will create a new route for new user signup, new
+
+Use rails generate to build scaffold: 
+
+```rails generate controller Users new```
+
+So recall that arguments arger the controller name, Users, are actions that we can setup
+right-away, 0 or many. 
+
 
 
 
